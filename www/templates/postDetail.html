@@ -1,0 +1,35 @@
+<ion-view view-title="Varta Re Varta" view-cache="false">
+  <ion-nav-bar class="bar-positive">
+  <ion-nav-back-button class="button-clear" ng-click="postDetail.back()">
+    <i class="ion-arrow-left-c"></i>
+  </ion-nav-back-button>
+</ion-nav-bar>
+  <ion-nav-buttons side="primary">
+         <div ng-show="!postDetail.bookmarked" ng-click="postDetail.bookmark(postDetail.fullDetail)">
+           <span class="icon ion-bookmark" style="font-size: 33px;"></span>
+</div>
+<div style="color:#ffc900" ng-show="postDetail.bookmarked" ng-click="postDetail.remove(postDetail.id)">
+           <span class="icon ion-bookmark" style="font-size: 33px;"></span>
+</div>
+    </ion-nav-buttons>
+    <ion-content>
+    
+    
+    <div style="background-color: #387ef5;">
+          <img class="full-image" style="padding-top:10px;" src="./img/vrat.png">
+
+    </div>
+    <div class="post-title-div padding">
+      <h2 style="font-family:Aakar;">{{postDetail.postTitle}}</h2>
+    </div>
+         <div class="padding gujarti" style="margin-top: 22px;" ng-bind-html="postDetail.content">
+         </div>
+         <div class="padding">
+           <button class="button button-block button-positive" ng-click="postDetail.shareAnyWhere(postDetail.content)">
+            <span style="float:left;"> <i class="icon ion-android-share-alt"></i></span>
+            Share This Post
+          </button>
+         </div>
+         
+  </ion-content>
+</ion-view>

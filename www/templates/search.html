@@ -1,0 +1,40 @@
+<ion-view view-title="Search">
+  <ion-content style="background-color:#b2b2b2;">
+      <div class="list list-inset">
+  <label class="item item-input">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input type="text" placeholder="Search" ng-model="search.keyword">
+  </label>
+</div>
+<!--ng-if="search.spinner"-->
+<div ng-if="search.spinner" style="text-align:center;padding-top:20px">
+<ion-spinner icon="spiral"></ion-spinner>
+</div>
+      <div class="list card postCard card-title1" ng-repeat="data in search.data track by $index">
+
+  <div class="item item-body item-black row" ng-click="search.gotopostDetail(data)">
+    <!--<div class="myWidth">
+    <img ng-src="{{data.image || 'img/noImage.svg'}}" class="img-card">  
+     </div>-->
+    <p class="title" style="margin-left: 14px; padding-bottom:12px; width:100%;">
+      {{data.title| limitTo:35}} {{data.title.length > 35 ? '...' : ''}}
+    </p>
+    <!--<div class="readFullArticle">
+    <p style="color:white;float: right;width: 118px;">Read Full Article</p>
+    </div>-->
+  </div>
+
+</div>
+<div class="padding" ng-if="search.data.length !== 0 && search.showLoadBtn">
+    <button class="button button-block button-positive" ng-click="search.loadMore()">Load more</button>
+
+  </div>
+        <div class="row" ng-if="search.data.length === 0 && !search.spinner">
+        <div class="col">
+          <div class="text-center">
+            <h3 style="text-align: center;padding-top: 35vh">No Search results..</h3>
+          </div>
+        </div>
+      </div>
+  </ion-content>
+</ion-view>

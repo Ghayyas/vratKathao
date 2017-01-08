@@ -1,0 +1,133 @@
+/*By Ghayyas Mubashir*/
+
+
+
+@font-face {
+    font-family: 'Aakar';
+    
+    src: local('Aakar'),
+         url('gujarati.ttf') format('truetype');
+    font-weight: lighter;
+    font-style: normal;
+}
+.scroll{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+ion-content{
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.title{
+  font-family:'Aakar';
+  color: white !important;
+  font-size: 18px !important;
+}
+.gujarti{
+  font-family: 'Aakar';
+  font-size: 14px;
+}
+
+.removeBottomPadding{
+  margin-bottom: 0;
+  padding: 0;
+}
+.noBorder{
+  border:none ;
+  color: black;
+  background-color: inherit;
+}
+.icon-colors{
+  color: rgba(0, 0, 0, 0.51);
+  font-size: 26px !important;
+}
+.sidemenu-name{
+  font-family: inherit;
+}
+.tabs-top > .tabs, .tabs.tabs-top{
+  top: 0;
+  /*width: 400%;*/
+}
+.blackBlackGround{
+  background-color: black;
+}
+.hasmyHead{
+  position: absolute;
+  top:43px;
+  background-color:#b2b2b2;
+}
+.item-black{
+  background-color: rgba(17, 17, 17, 0.8);
+}
+.card-image{
+    height: 50%;
+    width: 49%;
+}
+.readFullArticle{
+   position: absolute;
+    bottom: 9px;
+    left: 65%;
+    width: 33%;
+    
+}
+
+a.item-content{
+  background-color: inherit !important;
+}
+
+ul > li{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.detail-content{
+    color: white !important;
+    font-size: 18px !important;
+}
+.tab-item.tab-item-active{
+  border: none !important;
+}
+.bar .buttons-right span{
+  margin-left: -13px;
+}
+img{
+  width: 100%;
+}
+
+.img-card{
+   width: 93px;
+  height: 67px; 
+}
+.myWidth{
+    width: 100px;
+    height: 67px;
+    margin-top: 13px;
+    margin-bottom: 13px;
+    margin-left: 5px;
+}
+.cardwidth{
+  width: 200px;
+  height: 67px;
+  margin-top: 7px;
+  margin-bottom: 10px;
+}
+.postCard{
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-top: 10px;
+      margin-bottom: -6px;
+ }
+ .card-title1{
+   border-radius: 10px;
+ }
+ .post-title-div{
+    margin-top: 44px;
+    text-align: center;
+    text-decoration: underline;
+   
+ }
+ 
+/*a.tab-item {
+padding-left: 2%;
+    padding-right: 12%;
+}*/

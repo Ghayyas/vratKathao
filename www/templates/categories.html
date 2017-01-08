@@ -1,0 +1,30 @@
+
+<!--<ion-view view-title="Categories">
+    <ion-content style="background-color:#b2b2b2;padding-top: 26px;">
+  
+          <div ng-repeat="cat in category.data">
+          
+          <div class="item noBorder" ng-click="category.showCategoryDetail(cat.id,cat.title)">
+
+          <p style="color:black; font-size:18px; padding-top: 3px;padding-bottom: 3px;" class="gujarti">{{cat.title}}</p>
+
+         </div>
+         </div>
+
+        </ion-content>
+</ion-view>-->
+
+<ion-view view-title="Categories">
+  <ion-content style="background-color:#b2b2b2;">
+      <div class="list card postCard card-title1" ng-repeat="cat in category.data">
+
+  <div class="item item-body item-black row" ng-click="category.showCategoryDetail(cat.id,cat.title)">
+    
+    <p class="title" style="margin-left: 14px; padding-bottom:12px; width:100%;">
+      {{cat.title| limitTo:35}} {{data.title.length > 35 ? '...' : ''}}
+    </p>
+  </div>
+
+</div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,31 @@
+<ion-view view-title="BookMarked">
+  <ion-content style="background-color:#b2b2b2;">
+
+
+
+      <div class="list card postCard" ng-repeat="data in bookmark.data">
+
+        <div class="item item-body item-black row" ng-click="bookmark.gotopostDetail(data)">
+          <!--<div class="myWidth">
+            <img ng-src="{{data.attachments[0].url}}" class="img-card">
+          </div>-->
+
+          <p class="title" style="margin-left: 14px; padding-bottom:12px; width:100%;">
+            {{data.title| limitTo:35}} {{data.title.length > 35 ? '...' : ''}}
+          </p>
+          <div class="readFullArticle">
+            <p style="color:white;float: right;width: 118px;">Read Full Article</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" ng-if="bookmark.noBookmarked">
+        <div class="col">
+          <div class="text-center">
+            <h3 style="text-align: center;padding-top: 35vh">No Bookmarks</h3>
+            <p>No booksmarks added by you, You can bookmark any post by clicking on top right Icon</p>
+          </div>
+        </div>
+      </div>
+    </ion-content>
+</ion-view>

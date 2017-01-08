@@ -1,0 +1,65 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+
+    <ion-content style="background-color:#e5e5e5;">
+        <div class="list removeBottomPadding">
+      <img src="./img/vrat.png" alt="silderImg" style="width: 100%;  height: 180px;">
+    </div>
+      <ion-list class="padding">
+        <ion-item class="item noBorder item-icon-left" menu-close href="#/menu/home">
+         <i class="icon ion-ios-home icon-colors"></i> &nbsp;&nbsp;<span class="sidemenu-name">All</span>
+        </ion-item>
+                <ion-item menu-close class="item item-icon-left noBorder" href="#/menu/category">
+          <i class="icon ion-android-folder icon-colors"></i>
+              <!--&nbsp;&nbsp;Bookmarks-->
+         <span class="sidemenu-name"> &nbsp;&nbsp;Categories</span>
+        </ion-item>
+        <ion-item menu-close class="item item-icon-left noBorder" href="#/menu/bookmark">
+          <i class="icon ion-bookmark icon-colors"></i>
+              <!--&nbsp;&nbsp;Bookmarks-->
+         <span class="sidemenu-name"> &nbsp;&nbsp;Bookmarks</span>
+        </ion-item>
+
+        <!--<ion-item menu-close class="item item-icon-left noBorder" ng-click="likeUsOnFb()">
+         <i class="icon ion-thumbsup icon-colors"></i>
+          <span class="sidemenu-name">&nbsp;&nbsp;Like us On Facebook</span>
+
+        </ion-item>-->
+        <ion-item menu-close class="item item-icon-left noBorder" ng-click="shareAnywhere()">
+          <i class="icon ion-android-share-alt icon-colors"></i>
+          <!--&nbsp;&nbsp;Share with your Friends-->
+          <span class="sidemenu-name">&nbsp;&nbsp;Share with your Friends</span>
+
+        </ion-item>
+        <ion-item menu-close class="item item-icon-left noBorder" ng-click="RateUs()">
+          <i class="icon ion-ios-star-half icon-colors"></i>
+           <!--&nbsp;&nbsp;Rate NetYatra-->
+           <span class="sidemenu-name">&nbsp;&nbsp;Rate us</span>
+       </ion-item>
+        <ion-item menu-close class="item item-icon-left noBorder" href="#/menu/about">
+         <i class="icon ion-information"></i> 
+         <span class="sidemenu-name">&nbsp;&nbsp;About us</span>
+          <!--&nbsp;&nbsp;About us-->
+       </ion-item>
+        <ion-item menu-close class="item item-icon-left noBorder" ng-click="ourMoreApps()">
+          <i class="icon ion-android-apps"></i> 
+          <!--&nbsp;&nbsp;Our Other Apps-->
+          <span class="sidemenu-name">&nbsp;&nbsp;Our Other Apps</span>
+       </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

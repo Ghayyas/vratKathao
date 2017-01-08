@@ -1,0 +1,25 @@
+<ion-view view-title="{{categoryDetail.title}}" view-cache="false">
+    <ion-content style="background-color:#b2b2b2;">
+        
+<div class="list card postCard" ng-repeat="cat in categoryDetail.categoryArray">
+
+  <div class="item item-body item-black row" ng-click="categoryDetail.gotoCategoryDetail(cat)">
+ <!--<div class="myWidth">
+    <img ng-src="{{cat.image || 'img/noImage.svg'}}" class="img-card">  
+    </div>   
+    margin-top:7px; font-size: 17px!important;
+     -->
+    <p class="title" style="margin-left: 14px; padding-bottom:12px; width:100%;">
+      {{cat.title | limitTo:35}} {{cat.title.length > 35 ? '...' : ''}}
+    </p>
+    <!--<div class="readFullArticle">
+    <p style="color:white;float: right;width: 118px;">Read Full Article</p>
+    </div>-->
+  </div>
+
+</div>
+<div class="padding" ng-if="categoryDetail.categoryArray">
+    <button class="button button-block button-positive" ng-click="categoryDetail.loadMore()">Load more</button>
+  </div>
+</ion-content>
+    </ion-view>

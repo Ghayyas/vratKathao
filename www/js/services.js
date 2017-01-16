@@ -127,7 +127,7 @@ return {
  * 
  */
 
-vratService.service('bannerAd',function(){
+vratService.service('bannerAd',function($q){
      var admobid = {};
   if( /(android)/i.test(navigator.userAgent) ) { // for android & amazon-fireos
     admobid = {
@@ -152,13 +152,14 @@ vratService.service('bannerAd',function(){
     adId: admobid.banner,
     position: AdMob.AD_POSITION.BOTTOM_CENTER,
     autoShow: true });
+
 }
 
 this.hideBanner = function(){
   if(AdMob) AdMob.removeBanner();
 }
   
-  this.showInter = function(){
+   this.showInter = function(){
       // preppare and load ad resource in background, e.g. at begining of game level
    if(AdMob) AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:true} );
 
@@ -181,4 +182,63 @@ vratService.service('fbLikeService',function($q,$window){
       
       return deffer.promise;
    }
+})
+
+vratService.service('askedForUpate',function($q,$ionicPopup){
+  var deffer = $q.defer();
+  this.asked = function(){
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Alert!',
+      template: 'Would to like to check the update',
+      cancelText: 'No Thanks',
+      okText:'Yes Please'
+  });
+  confirmPopup.then(function(res) {
+        if(res) {
+         window.open('market://details?id=com.deucen.gujarativratkathao', '_system', 'location=yes');
+       } else {
+          //Do nothing
+        }
+        deffer.resolve(true);
+      });
+ return deffer.promise 
+ }
+})
+
+vratService.service('askedForRating',function($q,$cordovaAppRate){
+  var deffer = $q.defer();
+  this.askedForRate = function(){
+    AppRate.preferences = {
+      openStoreInApp: true,
+      useCustomRateDialog: false,
+      displayAppName: 'Vrat Kahatao',
+      // usesUntilPrompt: 5,
+      promptAgainForEachNewVersion: false,
+      storeAppURL: {
+      ios: '<my_app_id>',
+      android: 'market://details?id=com.deucen.gujarativratkathao',
+      windows: 'ms-windows-store://pdp/?ProductId=<the apps Store ID>',
+      blackberry: 'appworld://content/[App Id]/',
+      windows8: 'ms-windows-store:Review?name=<the Package Family Name of the application>'
+    },
+    customLocale: {
+      title: "Rate us",
+      message: "Would you like to Rate us ?",
+      cancelButtonLabel: "No, Thanks",
+      laterButtonLabel: "Remind Me Later",
+      rateButtonLabel: "Yes, Sure"
+    },
+    callbacks: {
+    onRateDialogShow: function(callback){
+      callback(0) // do nothing
+     deffer.resolve(true); 
+   },
+    onButtonClicked: function(buttonIndex){
+    //do noting  
+    }
+  }
+ };
+  AppRate.promptForRating(true);
+  return deffer.promise;
+  }
 })

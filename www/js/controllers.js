@@ -102,6 +102,7 @@ var app = angular.module('vrat.controllers', [])
         stopLoading.hide();
         // $localStorage.allPost = d.data.posts;
         _self.data = d.data.posts;
+        console.log('data',_self.data);
         totalCounts = d.data.count_total;
 
       }, function (e) {
@@ -132,16 +133,13 @@ var app = angular.module('vrat.controllers', [])
     _self.load();
 
     _self.loadMore = function () {
-
-      showLoading.show();
+     showLoading.show();
       c = c + 10;
-
       $http.get(WordPress_url +'/?json=get_recent_posts&count=' + c).then(function (r) {
         stopLoading.hide();
-
-        _self.data = r.data.posts;
+       _self.data = r.data.posts;
         if (r.data.count == totalCounts) {
-          alertService.showAlert('Sorry', "Sorry no more data is avalible");
+          alertService.showAlert('Sorry', "Sorry No More Stories Found  ");
         }
       }, function (e) {
         stopLoading.hide();
@@ -291,6 +289,7 @@ var app = angular.module('vrat.controllers', [])
       //  console.log('_self.data',d);
       // $localStorage.categoryDetailTitle = d.data.data.varta_lists;
       $localStorage.categoryDetailArray = d.data.posts;
+      console.log('data',d.data.posts)
       // $localStorage.categoryDetailCount = d.data.count;
 
       // _self.title = $localStorage.categoryDetailTitle;
@@ -376,7 +375,7 @@ var app = angular.module('vrat.controllers', [])
     var params = $stateParams.postID;
     var jsonParse = JSON.parse(params);
     $ionicPlatform.onHardwareBackButton(function () {
- 
+     
       bannerAd.showInter();
       bannerAd.hideBanner();
       $ionicHistory.goBack();
@@ -461,7 +460,7 @@ var app = angular.module('vrat.controllers', [])
     _self.shareFb = function (msg) {
       var output = msg.replace(/(<([^>]+)>)/ig, "");
 
-      $cordovaSocialSharing.shareViaFacebook(jsonParse.title +" " + "વ્રત કથાઓ નો વિશાળ ઓનલાઈન ખજાનો ધરાવતી એક માત્ર એપ્લીકેશન ડાઉનલોડ ફ્રી માં કરવા ક્લિક કરોો", null, "http://bit.ly/1TOaeCn ")
+      $cordovaSocialSharing.shareViaFacebook(jsonParse.title +" - " + "વ્રત કથાઓ નો વિશાળ ઓનલાઈન ખજાનો ધરાવતી એક માત્ર એપ્લીકેશન ડાઉનલોડ ફ્રી માં કરવા ક્લિક કરોો", null, "http://bit.ly/2i1i0Ha")
         .then(function (s) {
         }, function (e) {
         });
@@ -469,7 +468,7 @@ var app = angular.module('vrat.controllers', [])
 
     _self.shareAnyWhere = function (d) {
       setTimeout(function () {
-        $cordovaSocialSharing.share(jsonParse.title +" " + " વ્રત કથાઓ નો વિશાળ ઓનલાઈન ખજાનો ધરાવતી એક માત્ર એપ્લીકેશન ડાઉનલોડ ફ્રી માં કરવા ક્લિક કરો", null, null, "http://bit.ly/1TOaeCn");
+        $cordovaSocialSharing.share(jsonParse.title + "-" + " વ્રત કથાઓ નો વિશાળ ઓનલાઈન ખજાનો ધરાવતી એક માત્ર એપ્લીકેશન ડાઉનલોડ ફ્રી માં કરવા ક્લિક કરો", null, null, "http://bit.ly/2i1i0Ha");
       }, 300);
     };
 

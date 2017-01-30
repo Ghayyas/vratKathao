@@ -13,7 +13,7 @@ angular.module('vrat', ['ionic', 'ionic.cloud', 'vrat.controllers', 'vratFilter'
     $timeout(function(){
     var checkForUpdateInLocal = $localStorage.updateDialog;
     var checkForRateInLocal = $localStorage.rateDialog;
-   if(TodaysDate > 20 && TodaysDate < 23){
+   if(TodaysDate > 1 && TodaysDate < 6){
      if(!checkForUpdateInLocal){
        askedForUpate.asked().then(function(s){
       if(s){
@@ -28,7 +28,7 @@ angular.module('vrat', ['ionic', 'ionic.cloud', 'vrat.controllers', 'vratFilter'
 else{
     $localStorage.updateDialog = false;
   }
-if(TodaysDate > 23 && TodaysDate < 26){
+if(TodaysDate > 6 && TodaysDate < 11){
      if(!checkForRateInLocal){
        askedForRating.askedForRate().then(function(s){
       if(s){
@@ -50,7 +50,7 @@ else{
   //       $localStorage.rateDialog = false;
   //   }
     
-    if(TodaysDate === 20){
+    if(TodaysDate === 1){
      if(!checkForUpdateInLocal){
       askedForUpate.asked().then(function(s){
       if(s){
@@ -61,7 +61,7 @@ else{
       }
     })
   }}
-    else if(TodaysDate === 23){
+    else if(TodaysDate === 6){
       if(!checkForRateInLocal){
    askedForRating.askedForRate().then(function(s){
      if(s){

@@ -145,6 +145,14 @@ vratService.service('bannerAd',function($q){
       interstitial: 'ca-app-pub-7631554899487555/5248319426'
     };
   }
+this.prepareInitial = function(){
+  // preppare and load ad resource in background, e.g. at begining of game level
+  //  if(typeof(AdMob) !== 'undefined') AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:true},function(s){
+  //     console.log('initial success',s);
+  //  },function(fail){
+  //    console.log('inital failed',fail);
+  //  });
+}
   
   this.banner = function(){
   
@@ -160,11 +168,14 @@ this.hideBanner = function(){
 }
   
    this.showInter = function(){
-      // preppare and load ad resource in background, e.g. at begining of game level
-   if(AdMob) AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:true} );
-
-  // show the interstitial later, e.g. at end of game level
-  if(AdMob) AdMob.showInterstitial();
+  if(AdMob) AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:true},function(s){
+    AdMob.showInterstitial();
+  },function(e){
+  });
+      // check and show it at end of a game level
+      AdMob.isInterstitialReady(function(ready){
+        if(ready) AdMob.showInterstitial();
+      });
   }
 })
 
@@ -179,12 +190,11 @@ vratService.service('fbLikeService',function($q,$window){
         else{
           deffer.reject(true);
         }
-      
       return deffer.promise;
    }
 })
 
-vratService.service('askedForUpate',function($q,$ionicPopup){
+vratService.service('askedForUpate',function($q,$ionicPopup,$window){
   var deffer = $q.defer();
   this.asked = function(){
     var confirmPopup = $ionicPopup.confirm({
@@ -195,7 +205,7 @@ vratService.service('askedForUpate',function($q,$ionicPopup){
   });
   confirmPopup.then(function(res) {
         if(res) {
-         window.open('market://details?id=com.deucen.gujarativratkathao', '_system', 'location=yes');
+         $window.open('market://details?id=com.deucen.gujarativratkathao', '_system', 'location=yes');
        } else {
           //Do nothing
         }

@@ -4,14 +4,16 @@
 
 var db = null;
 angular.module('vrat', ['ionic', 'ionic.cloud', 'vrat.controllers', 'vratFilter', 'vrat.Service', 'ngStorage', 'ngCordova'])
-.run(function ($ionicPlatform, $ionicPush, $timeout, $cordovaSplashscreen, $state, $rootScope, $http,$localStorage,httpRequest,$cordovaSQLite,$ionicPopup,askedForUpate,askedForRating) {
+.run(function ($ionicPlatform, $ionicPush, $timeout, $cordovaSplashscreen, $state, $rootScope, $http,$localStorage,httpRequest,$cordovaSQLite,$ionicPopup,askedForUpate,askedForRating,bannerAd) {
    $ionicPlatform.ready(function () {
     //Checking or update and rate the app_id
+    bannerAd.prepareInitial();
     var date = new Date();
     var TodaysDate = date.getDate();
+    $timeout(function(){
     var checkForUpdateInLocal = $localStorage.updateDialog;
     var checkForRateInLocal = $localStorage.rateDialog;
-   if(TodaysDate > 5 && TodaysDate < 10){
+   if(TodaysDate > 20 && TodaysDate < 23){
      if(!checkForUpdateInLocal){
        askedForUpate.asked().then(function(s){
       if(s){
@@ -23,7 +25,10 @@ angular.module('vrat', ['ionic', 'ionic.cloud', 'vrat.controllers', 'vratFilter'
     });
   }
 }
-if(TodaysDate > 20 && TodaysDate < 29){
+else{
+    $localStorage.updateDialog = false;
+  }
+if(TodaysDate > 23 && TodaysDate < 26){
      if(!checkForRateInLocal){
        askedForRating.askedForRate().then(function(s){
       if(s){
@@ -35,15 +40,19 @@ if(TodaysDate > 20 && TodaysDate < 29){
     });
   }
 }
-    if(TodaysDate > 10){
-        $localStorage.updateDialog = false;
-    }
-   if(TodaysDate > 1 && TodaysDate < 20){
-        $localStorage.rateDialog = false;
-    }
+else{
+  $localStorage.rateDialog = false;
+}
+  //   if(TodaysDate > 10){
+  //       $localStorage.updateDialog = false;
+  //   }
+  //  if(TodaysDate > 20 && TodaysDate < 22){
+  //       $localStorage.rateDialog = false;
+  //   }
     
-    if(TodaysDate === 5){
-    askedForUpate.asked().then(function(s){
+    if(TodaysDate === 20){
+     if(!checkForUpdateInLocal){
+      askedForUpate.asked().then(function(s){
       if(s){
         $localStorage.updateDialog = true
       }
@@ -51,8 +60,9 @@ if(TodaysDate > 20 && TodaysDate < 29){
         $localStorage.updateDialog = false;
       }
     })
-  }
-    else if(TodaysDate === 20){
+  }}
+    else if(TodaysDate === 23){
+      if(!checkForRateInLocal){
    askedForRating.askedForRate().then(function(s){
      if(s){
         $localStorage.rateDialog = true
@@ -60,7 +70,9 @@ if(TodaysDate > 20 && TodaysDate < 29){
       else{
         $localStorage.rateDialog = false;
       }
-   })}
+    })}}      
+    },3000);
+
     db = $cordovaSQLite.openDB({ name: "vrat.db", location: 'default' });
     $cordovaSQLite.execute(db,"CREATE TABLE IF NOT EXISTS categories (id integer primary key, title text)");
     $cordovaSQLite.execute(db,"CREATE TABLE IF NOT EXISTS posts (id integer primary key, post text)");

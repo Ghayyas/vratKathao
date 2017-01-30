@@ -87,9 +87,10 @@ var app = angular.module('vrat.controllers', [])
 
     var _self = this;
     $scope.$on("$ionicView.beforeEnter", function (event, data) {
-      bannerAd.hideBanner();
-
-    });
+      if(typeof(AdMob) !== 'undefined'){
+         bannerAd.hideBanner()
+      }
+});
     // handle event
     _self.desibleLoadBtn = false;
     var c;
@@ -102,7 +103,6 @@ var app = angular.module('vrat.controllers', [])
         stopLoading.hide();
         // $localStorage.allPost = d.data.posts;
         _self.data = d.data.posts;
-        console.log('data',_self.data);
         totalCounts = d.data.count_total;
 
       }, function (e) {
@@ -133,23 +133,22 @@ var app = angular.module('vrat.controllers', [])
     _self.load();
 
     _self.loadMore = function () {
+     c = c + 10;
+      if(_self.data.length == totalCounts){
+         alertService.showAlert('Sorry', "Sorry No More Stories Found");
+      }
+      else{
      showLoading.show();
-      c = c + 10;
-      $http.get(WordPress_url +'/?json=get_recent_posts&count=' + c).then(function (r) {
+     $http.get(WordPress_url +'/?json=get_recent_posts&count=' + c).then(function (r) {
         stopLoading.hide();
        _self.data = r.data.posts;
-        if (r.data.count == totalCounts) {
-          alertService.showAlert('Sorry', "Sorry No More Stories Found  ");
-        }
       }, function (e) {
         stopLoading.hide();
         alertService.showAlert('Error', "Make Sure you have working Internet Connections");
       });
-
-    };
-
-
-    _self.gotopostDetail = function (data) {
+    }};
+   
+   _self.gotopostDetail = function (data) {
 
       var jsonString = JSON.stringify(data);
 
@@ -277,7 +276,9 @@ var app = angular.module('vrat.controllers', [])
     var _self = this;
     var count;
     $scope.$on("$ionicView.beforeEnter", function (event, data) {
-      bannerAd.hideBanner();
+     if(typeof(AdMob) !== 'undefined'){
+        bannerAd.hideBanner();
+     }
 
     });
 
@@ -289,7 +290,6 @@ var app = angular.module('vrat.controllers', [])
       //  console.log('_self.data',d);
       // $localStorage.categoryDetailTitle = d.data.data.varta_lists;
       $localStorage.categoryDetailArray = d.data.posts;
-      console.log('data',d.data.posts)
       // $localStorage.categoryDetailCount = d.data.count;
 
       // _self.title = $localStorage.categoryDetailTitle;
@@ -375,20 +375,25 @@ var app = angular.module('vrat.controllers', [])
     var params = $stateParams.postID;
     var jsonParse = JSON.parse(params);
     $ionicPlatform.onHardwareBackButton(function () {
-     
+     if(typeof(AdMob)!=='undefined'){
       bannerAd.showInter();
       bannerAd.hideBanner();
-      $ionicHistory.goBack();
+      $ionicHistory.goBack(); 
+     }
     });
-
-    _self.back = function () {
+   _self.back = function () {
+    if(typeof(AdMob)!=='undefined'){
       bannerAd.showInter();
       bannerAd.hideBanner();
-      $ionicHistory.goBack();
+      $ionicHistory.goBack(); 
+     }
     };
     _self.postTitle = jsonParse.title;
     $scope.$on("$ionicView.beforeEnter", function (event, data) {
       showLoading.show();
+      if(typeof(AdMob)!=='undefined'){
+            bannerAd.banner();
+        }
       // 
     //  console.log('post works')
     //   _self.postDetailArray = StorageService.getAll();
@@ -408,7 +413,8 @@ var app = angular.module('vrat.controllers', [])
     //   }
      var bookmarkArray = [];
       var query = "SELECT * FROM bookmark";
-          $cordovaSQLite.execute(db,query).then(function(res){
+        $cordovaSQLite.execute(db,query).then(function(res){
+
             
             if(res.rows.length > 0) {
                 for(var i = 0; i < res.rows.length; i++){
@@ -437,14 +443,7 @@ var app = angular.module('vrat.controllers', [])
           },function(e){
             
           })
-    
-    
-    
-    
-    
-    
-      bannerAd.banner();
-    });
+  });
 
     $timeout(function () {
       stopLoading.hide();

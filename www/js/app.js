@@ -73,7 +73,7 @@ else{
     })}}      
     },3000);
 
-    db = $cordovaSQLite.openDB({ name: "vrat.db", location: 'default' });
+    db = $cordovaSQLite.openDB({ name: database_name, location: 'default' });
     $cordovaSQLite.execute(db,"CREATE TABLE IF NOT EXISTS categories (id integer primary key, title text)");
     $cordovaSQLite.execute(db,"CREATE TABLE IF NOT EXISTS posts (id integer primary key, post text)");
     $cordovaSQLite.execute(db,"CREATE TABLE IF NOT EXISTS allPosts (id integer primary key, post key)");
@@ -124,7 +124,7 @@ else{
       $rootScope.$on('$stateChangeSuccess', function () {
         if (typeof analytics !== 'undefined') {
           analytics.debugMode();
-          analytics.startTrackerWithId("UA-89946979-1");
+          analytics.startTrackerWithId(tracker_id);
           window.analytics.trackEvent('Category', 'Action', 'Label', 12);
           window.analytics.trackException('Description', true);
           window.analytics.trackTiming('Category', 3334, 'Variable', 'Label');
@@ -154,10 +154,10 @@ else{
   .config(function ($stateProvider, $urlRouterProvider, $ionicCloudProvider) {
     $ionicCloudProvider.init({
       "core": {
-        "app_id": "65e1f05d"
+        "app_id": app_id
       },
       "push": {
-        "sender_id": "188530049779",  
+        "sender_id": sender_id,  
         "pluginConfig": {
           "ios": {
             "badge": true,  

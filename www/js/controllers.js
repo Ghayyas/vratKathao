@@ -9,11 +9,11 @@ var app = angular.module('vrat.controllers', [])
 
 
     //Share AnyWhere Function
-    var shareTitle = 'વ્રત કથાઓ નો વિશાળ ઓનલાઈન ખજાનો ધરાવતી એક માત્ર એપ્લીકેશન ડાઉનલોડ ફ્રી માં કરવા ક્લિક કરો';
+    var shareTitle = sharingTitle;
     $scope.shareAnywhere = function () {
 
       $timeout(function () {
-        $cordovaSocialSharing.share(shareTitle, null, null, "http://bit.ly/2i1i0Ha");
+        $cordovaSocialSharing.share(shareTitle, null, null, short_sharing_link);
       }, 300);
 
     };
@@ -21,8 +21,13 @@ var app = angular.module('vrat.controllers', [])
     // Rate us Function
 
     $scope.RateUs = function () {
-      
-        window.open('market://details?id=com.deucen.gujarativratkathao', '_system', 'location=yes');
+      if(ionicPlatform == 'android'){
+         window.open('market://details?id='+play_id, '_system', 'location=yes');
+      }
+      else{
+        window.open(apple_id, '_system', 'location=yes');
+      }
+        
         //$cordovaInAppBrowser.open('https://play.google.com/store/apps/details?id=com.deucen.netyatraa', '_blank', options);
     }
 
@@ -58,7 +63,7 @@ var app = angular.module('vrat.controllers', [])
     $scope.likeUsOnFb = function () {
         fbLikeService.openWindow().then(function(d){
         },function(e){
-          $window.open('https://www.facebook.com/1519563958349711', '_system', 'location=yes');
+          $window.open(fb_page, '_system', 'location=yes');
         })
 
     };
@@ -68,7 +73,7 @@ var app = angular.module('vrat.controllers', [])
 
     $scope.ourMoreApps = function () {
      
-        $window.open('market://search?q=pub%3ADeuceN%20Tech&c=apps', '_system', 'location=yes');
+        $window.open(more_apps_links, '_system', 'location=yes');
 
     }
 
@@ -459,7 +464,7 @@ var app = angular.module('vrat.controllers', [])
     _self.shareFb = function (msg) {
       var output = msg.replace(/(<([^>]+)>)/ig, "");
 
-      $cordovaSocialSharing.shareViaFacebook(jsonParse.title +" - " + "વ્રત કથાઓ નો વિશાળ ઓનલાઈન ખજાનો ધરાવતી એક માત્ર એપ્લીકેશન ડાઉનલોડ ફ્રી માં કરવા ક્લિક કરોો", null, "http://bit.ly/2i1i0Ha")
+      $cordovaSocialSharing.shareViaFacebook(jsonParse.title +" - " + sharingTitle, null, short_sharing_link)
         .then(function (s) {
         }, function (e) {
         });
@@ -467,7 +472,7 @@ var app = angular.module('vrat.controllers', [])
 
     _self.shareAnyWhere = function (d) {
       setTimeout(function () {
-        $cordovaSocialSharing.share(jsonParse.title + "-" + " વ્રત કથાઓ નો વિશાળ ઓનલાઈન ખજાનો ધરાવતી એક માત્ર એપ્લીકેશન ડાઉનલોડ ફ્રી માં કરવા ક્લિક કરો", null, null, "http://bit.ly/2i1i0Ha");
+        $cordovaSocialSharing.share(jsonParse.title + "-" + sharingTitle, null, null, short_sharing_link);
       }, 300);
     };
 
@@ -585,7 +590,7 @@ var app = angular.module('vrat.controllers', [])
 
 
     var _self = this;
-    _self.content = "ગુજરાતી સ્ત્રી મિત્રોને આજના ડીજીટલ યુગમાં વ્રત કથા માટે ચોપડી હાથવગી ના હોય અને કથા સાંભળવા/વાંચવા માટે આડોશ પાડોશ કે નેટ પર હેરાન ના થવું પડે તે હેતુ થી “ગુજરાતી વ્રત કથાઓ” ની આ એપ્લીકેશન બનાવવામાં આવેલ છે. એપ્લીકેશન માં રહેલી કથાઓ અમારી ટીમ ના સ્ત્રી સભ્યોએ ગુજરાતી પુસ્તકો કે કોઈ ઉપલબ્ધ ઈન્ટરનેટ ના સ્ત્રોત નો ઉપયોગ કરીને લખેલ છે. અને એટલે જ કન્ટેન્ટ પર અમારો તમામ અધિકાર છે. કોઈ મિત્રો ને તેમના પરિવાર ના સભ્યો કે બીજા મિત્રો સાથે કોઈ પણ કથા શેર કરવી હોય તો કથા ની નીચે આપેલ શેરીંગ ઓપ્શન નો ઉપયોગ કરીને કરી શકે છે. All Stories ના ઓપ્શન થી તમે કથા સર્ચ પણ કરી શકશો. અને જો કોઈ કથા અહી ઉપલબ્ધ ના હોય તો તમે અમને ઈમેઈલ કરી શકો છો અને તમારા સૂચનો પણ આપી શકો છો. અમારો સંપર્ક ઇમેઇલથી કરવા ઈમેઈલ કરો ideabox.innovations@gmail.com  ગુજરાતી મિત્રો ના લાભાર્થે ઘણી એપ્લીકેશન અમે બનાવેલ છે. તમામ એપ્લીકેશન ની યાદી જોવા મેનુ માંથી ઓપ્શન ક્લિક કરશો. અને હા મિત્રો, અમારી આ એપ્લીકેશન દરેક ગુજરાતી મિત્રો સાથે શેર કરવા વિનંતી. આભાર. વાંચે ગુજરાત, વંચાવે ગુજરાત જય શ્રી કૃષ્ણ ";
+    _self.content = about_Content
  })
   
   
@@ -634,22 +639,16 @@ var app = angular.module('vrat.controllers', [])
       
      var countMore = count+ count;
      $http.get(WordPress_url+ '?json=get_search_results&search='+query+"&count="+countMore).then(function(s){
-  
        _self.data = s.data.posts;
        _self.showLoadBtn = true;
      $ionicLoading.hide();
      },function(e){
        $ionicLoading.hide();
       alertService.showAlert('Error !', 'Make Sure you have working Internet Connection');
-
-     })
+    });
    }
-   
    _self.gotopostDetail = function(d){
      var jsonString = JSON.stringify(d);
-
-
-      $state.go('menu.postDetail', {postID: jsonString});
-
-   }
+     $state.go('menu.postDetail', {postID: jsonString});
+    }
 });

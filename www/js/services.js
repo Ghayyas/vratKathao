@@ -131,18 +131,18 @@ vratService.service('bannerAd',function($q){
      var admobid = {};
   if( /(android)/i.test(navigator.userAgent) ) { // for android & amazon-fireos
     admobid = {
-      banner: 'ca-app-pub-7631554899487555/3771586229', // or DFP format "/6253334/dfp_example_ad"
-      interstitial: 'ca-app-pub-7631554899487555/5248319426'
+      banner: banner, // or DFP format "/6253334/dfp_example_ad"
+      interstitial: interstitial
     };
   } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) { // for ios
     admobid = {
-      banner: 'ca-app-pub-7631554899487555/3771586229', // or DFP format "/6253334/dfp_example_ad"
-      interstitial: 'ca-app-pub-7631554899487555/5248319426'
+      banner: banner, // or DFP format "/6253334/dfp_example_ad"
+      interstitial: interstitial
     };
   } else { // for windows phone
     admobid = {
-      banner: 'ca-app-pub-7631554899487555/3771586229', // or DFP format "/6253334/dfp_example_ad"
-      interstitial: 'ca-app-pub-7631554899487555/5248319426'
+      banner: banner, // or DFP format "/6253334/dfp_example_ad"
+      interstitial: interstitial
     };
   }
 this.prepareInitial = function(){
@@ -183,7 +183,7 @@ this.hideBanner = function(){
 vratService.service('fbLikeService',function($q,$window){
       var deffer = $q.defer();
        this.openWindow = function(){ 
-        var d = $window.open('fb://page/1519563958349711', '_system');
+        var d = $window.open(fb_page, '_system');
         if(d){
           deffer.resolve(true);
         }
@@ -205,7 +205,12 @@ vratService.service('askedForUpate',function($q,$ionicPopup,$window){
   });
   confirmPopup.then(function(res) {
         if(res) {
-         $window.open('market://details?id=com.deucen.gujarativratkathao', '_system', 'location=yes');
+        if(ionicPlatform == 'android'){
+         $window.open('market://details?id='+play_id, '_system', 'location=yes');
+        }
+        else{
+          $window.open(apple_id,'_system','location=yes');
+        }
        } else {
           //Do nothing
         }
@@ -221,12 +226,12 @@ vratService.service('askedForRating',function($q,$cordovaAppRate){
     AppRate.preferences = {
       openStoreInApp: true,
       useCustomRateDialog: false,
-      displayAppName: 'Vrat Kahatao',
+      displayAppName: app_name,
       // usesUntilPrompt: 5,
       promptAgainForEachNewVersion: false,
       storeAppURL: {
-      ios: '<my_app_id>',
-      android: 'market://details?id=com.deucen.gujarativratkathao',
+      ios: apple_rateApp, //'id512939461',
+      android: 'market://details?id='+play_id,
       windows: 'ms-windows-store://pdp/?ProductId=<the apps Store ID>',
       blackberry: 'appworld://content/[App Id]/',
       windows8: 'ms-windows-store:Review?name=<the Package Family Name of the application>'

@@ -230,7 +230,7 @@ vratService.service('askedForRating',function($q,$cordovaAppRate){
       // usesUntilPrompt: 5,
       promptAgainForEachNewVersion: false,
       storeAppURL: {
-      ios: apple_rateApp, //'id512939461',
+      ios:'512939461',
       android: 'market://details?id='+play_id,
       windows: 'ms-windows-store://pdp/?ProductId=<the apps Store ID>',
       blackberry: 'appworld://content/[App Id]/',
@@ -250,6 +250,7 @@ vratService.service('askedForRating',function($q,$cordovaAppRate){
    },
     onButtonClicked: function(buttonIndex){
     //do noting  
+    console.log('button index',buttonIndex);
     }
   }
  };

@@ -220,7 +220,7 @@ vratService.service('askedForUpate',function($q,$ionicPopup,$window){
  }
 })
 
-vratService.service('askedForRating',function($q,$cordovaAppRate){
+vratService.service('askedForRating',function($q,$cordovaAppRate,$window){
   var deffer = $q.defer();
   this.askedForRate = function(){
     AppRate.preferences = {
@@ -230,7 +230,7 @@ vratService.service('askedForRating',function($q,$cordovaAppRate){
       // usesUntilPrompt: 5,
       promptAgainForEachNewVersion: false,
       storeAppURL: {
-      ios: apple_rateApp, //'id512939461',
+      ios: apple_id, //'id512939461',
       android: 'market://details?id='+play_id,
       windows: 'ms-windows-store://pdp/?ProductId=<the apps Store ID>',
       blackberry: 'appworld://content/[App Id]/',
@@ -250,6 +250,14 @@ vratService.service('askedForRating',function($q,$cordovaAppRate){
    },
     onButtonClicked: function(buttonIndex){
     //do noting  
+         if(buttonIndex == 1){
+           if(ionicPlatform == 'android'){
+             //do nothing
+           }
+           else{
+             $window.open(apple_id,'_system','location=true');
+           }
+         }
     }
   }
  };

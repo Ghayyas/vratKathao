@@ -249,7 +249,7 @@ vratService.service('askedForRating',function($q,$cordovaAppRate,$window){
      deffer.resolve(true); 
    },
     onButtonClicked: function(buttonIndex){
-    //do noting  
+    //do noting
          if(buttonIndex == 1){
            if(ionicPlatform == 'android'){
              //do nothing

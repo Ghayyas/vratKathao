@@ -72,9 +72,12 @@ var app = angular.module('vrat.controllers', [])
     //Our More Apps
 
     $scope.ourMoreApps = function () {
-     
-        $window.open(more_apps_links, '_system', 'location=yes');
-
+       if(ionicPlatform == 'android'){
+           $window.open(more_apps_links, '_system', 'location=yes');
+       }
+       else{
+         $window.open(more_apps_links_ios,'_system','location=yes');
+       }
     }
 
 

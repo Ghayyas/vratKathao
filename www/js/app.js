@@ -6,6 +6,8 @@ var db = null;
 angular.module('vrat', ['ionic', 'ionic.cloud', 'vrat.controllers', 'vratFilter', 'vrat.Service', 'ngStorage', 'ngCordova'])
 .run(function ($ionicPlatform, $ionicPush, $timeout, $cordovaSplashscreen, $state, $rootScope, $http,$localStorage,httpRequest,$cordovaSQLite,$ionicPopup,askedForUpate,askedForRating,bannerAd) {
    $ionicPlatform.ready(function () {
+    window.alert('works');
+    console.log('checking if sucess ');
     //Checking or update and rate the app_id
     bannerAd.prepareInitial();
     var date = new Date();
@@ -105,22 +107,25 @@ else{
        });
     });
       $ionicPush.register().then(function (t) {
+        console.log('push register',t);
         return $ionicPush.saveToken(t);
       }).then(function (t) {
       });
       $rootScope.$on('cloud:push:notification', function (event, data) {
         var msg = data.message;
         var payload = data.message.payload;
-        console.log("type",typeof(payload),'id');
+        window.alert("New push recievd");
+        console.log("push register recived new push",typeof(payload),'id');
         if (payload !== undefined) {
           $http.get(WordPress_url +'/?json=get_post&post_id='+ payload.id).then(function (d) {
             var jsonStn = JSON.stringify(d.data.post);
             $state.go('menu.postDetail', {postID: jsonStn});
            }, function (e) {
-           //do nothing 
+           //do nothing
           })
         }
       });
+                        
       $rootScope.$on('$stateChangeSuccess', function () {
         if (typeof analytics !== 'undefined') {
           analytics.debugMode();

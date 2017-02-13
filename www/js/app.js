@@ -6,8 +6,6 @@ var db = null;
 angular.module('vrat', ['ionic', 'ionic.cloud', 'vrat.controllers', 'vratFilter', 'vrat.Service', 'ngStorage', 'ngCordova'])
 .run(function ($ionicPlatform, $ionicPush, $timeout, $cordovaSplashscreen, $state, $rootScope, $http,$localStorage,httpRequest,$cordovaSQLite,$ionicPopup,askedForUpate,askedForRating,bannerAd) {
    $ionicPlatform.ready(function () {
-    window.alert('works');
-    console.log('checking if sucess ');
     //Checking or update and rate the app_id
     bannerAd.prepareInitial();
     var date = new Date();
@@ -107,14 +105,22 @@ else{
        });
     });
       $ionicPush.register().then(function (t) {
-        console.log('push register',t);
-        return $ionicPush.saveToken(t);
+     return $ionicPush.saveToken(t);
       }).then(function (t) {
-      });
+       $ionicPopup.alert({
+        title: "Token saved",
+        template: JSON.stringify(t)
+        });  
+    },function(e){
+      $ionicPopup.alert({
+        title: 'Error!',
+        template: JSON.stringify(e)
+      })
+    });
       $rootScope.$on('cloud:push:notification', function (event, data) {
         var msg = data.message;
         var payload = data.message.payload;
-        window.alert("New push recievd");
+        window.alert("Cloud Push Notification Recived");
         console.log("push register recived new push",typeof(payload),'id');
         if (payload !== undefined) {
           $http.get(WordPress_url +'/?json=get_post&post_id='+ payload.id).then(function (d) {
@@ -125,6 +131,18 @@ else{
           })
         }
       });
+      push.on('notification', function(data) {
+    // do something with the push data
+       window.alert('Notification Recieved push on' + JSON.stringify(data));
+    // then call finish to let the OS know we are done
+        push.finish(function() {
+           window.alert('Notification finish');
+            console.log("processing of push data is finished");
+        }, function() {
+             window.alert("something went wrong with push.finish for ID = " + JSON.stringify(data.additionalData.notId));
+            console.log("something went wrong with push.finish for ID = " + data.additionalData.notId)
+        }, data.additionalData.notId);
+    });
                         
       $rootScope.$on('$stateChangeSuccess', function () {
         if (typeof analytics !== 'undefined') {

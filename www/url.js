@@ -2,7 +2,7 @@
 
 var WordPress_url = "http://deuceapps.in/vratkathao";
 var database_name = 'vrat.db';
-var app_id = "65e1f05d";
+var app_id = "70b7e277-d09d-47a3-a041-714c4864376a";//"65e1f05d";
 var sender_id = "188530049779";
 var banner = "ca-app-pub-7631554899487555/3771586229";
 var interstitial = "ca-app-pub-7631554899487555/5248319426";

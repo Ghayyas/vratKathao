@@ -3,8 +3,8 @@
 //Date: 7/1/17
 
 var db = null;
-angular.module('vrat', ['ionic', 'ionic.cloud', 'vrat.controllers', 'vratFilter', 'vrat.Service', 'ngStorage', 'ngCordova'])
-.run(function ($ionicPlatform, $ionicPush, $timeout, $cordovaSplashscreen, $state, $rootScope, $http,$localStorage,httpRequest,$cordovaSQLite,$ionicPopup,askedForUpate,askedForRating,bannerAd) {
+angular.module('vrat', ['ionic', 'vrat.controllers', 'vratFilter', 'vrat.Service', 'ngStorage', 'ngCordova'])
+.run(function ($ionicPlatform, $timeout, $cordovaSplashscreen, $state, $rootScope, $http,$localStorage,httpRequest,$cordovaSQLite,$ionicPopup,askedForUpate,askedForRating,bannerAd) {
    $ionicPlatform.ready(function () {
     //Checking or update and rate the app_id
     bannerAd.prepareInitial();
@@ -104,45 +104,51 @@ else{
                    // http Error
        });
     });
-      $ionicPush.register().then(function (t) {
-     return $ionicPush.saveToken(t);
-      }).then(function (t) {
-       $ionicPopup.alert({
-        title: "Token saved",
-        template: JSON.stringify(t)
-        });  
-    },function(e){
-      $ionicPopup.alert({
-        title: 'Error!',
-        template: JSON.stringify(e)
-      })
-    });
-      $rootScope.$on('cloud:push:notification', function (event, data) {
-        var msg = data.message;
-        var payload = data.message.payload;
-        window.alert("Cloud Push Notification Recived");
-        console.log("push register recived new push",typeof(payload),'id');
+    //   $ionicPush.register().then(function (t) {
+    //  return $ionicPush.saveToken(t);
+    //   }).then(function (t) {
+    //    $ionicPopup.alert({
+    //     title: "Token saved",
+    //     template: JSON.stringify(t)
+    //     });  
+    // },function(e){
+    //   $ionicPopup.alert({
+    //     title: 'Error!',
+    //     template: JSON.stringify(e)
+    //   })
+    // });
+    //   $rootScope.$on('cloud:push:notification', function (event, data) {
+    //     var msg = data.message;
+    //     var payload = data.message.payload;
+    //     window.alert("Cloud Push Notification Recived");
+    //     console.log("push register recived new push",typeof(payload),'id');
+    //     if (payload !== undefined) {
+    //       $http.get(WordPress_url +'/?json=get_post&post_id='+ payload.id).then(function (d) {
+    //         var jsonStn = JSON.stringify(d.data.post);
+    //         $state.go('menu.postDetail', {postID: jsonStn});
+    //        }, function (e) {
+    //        //do nothing
+    //       })
+    //     }
+    //   });
+      var notificationOpenedCallback = function(data) {
+        console.log("notificationOpenedCallback: " ,data);
+        var payload = data.notification.payload.additionalData;
         if (payload !== undefined) {
           $http.get(WordPress_url +'/?json=get_post&post_id='+ payload.id).then(function (d) {
             var jsonStn = JSON.stringify(d.data.post);
             $state.go('menu.postDetail', {postID: jsonStn});
            }, function (e) {
            //do nothing
-          })
-        }
-      });
-      push.on('notification', function(data) {
-    // do something with the push data
-       window.alert('Notification Recieved push on' + JSON.stringify(data));
-    // then call finish to let the OS know we are done
-        push.finish(function() {
-           window.alert('Notification finish');
-            console.log("processing of push data is finished");
-        }, function() {
-             window.alert("something went wrong with push.finish for ID = " + JSON.stringify(data.additionalData.notId));
-            console.log("something went wrong with push.finish for ID = " + data.additionalData.notId)
-        }, data.additionalData.notId);
-    });
+          })  
+    };
+  }
+
+      window.plugins.OneSignal
+        .startInit(app_id)
+        .inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.None)
+        .handleNotificationOpened(notificationOpenedCallback)
+        .endInit();
                         
       $rootScope.$on('$stateChangeSuccess', function () {
         if (typeof analytics !== 'undefined') {
@@ -174,24 +180,7 @@ else{
       }, 3000);
     });
     })
-  .config(function ($stateProvider, $urlRouterProvider, $ionicCloudProvider) {
-    $ionicCloudProvider.init({
-      "core": {
-        "app_id": app_id
-      },
-      "push": {
-        "sender_id": sender_id,  
-        "pluginConfig": {
-          "ios": {
-            "badge": true,  
-            "sound": true
-          },
-          "android": {
-            "iconColor": "#f52727"
-          }
-        }
-      }
-    });
+  .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('menu', {
         url: '/menu',

@@ -11,8 +11,23 @@ angular.module('vrat', ['ionic', 'vrat.controllers', 'vratFilter', 'vrat.Service
     var date = new Date();
     var TodaysDate = date.getDate();
     $timeout(function(){
+    
     var checkForUpdateInLocal = $localStorage.updateDialog;
     var checkForRateInLocal = $localStorage.rateDialog;
+    var localCounter = $localStorage.getCounter;
+    console.log('localCouner',localCounter);
+    if(localCounter > -1){
+      console.log(true);
+      $localStorage.getCounter = $localStorage.getCounter + 1;
+    }
+    else{
+      $localStorage.getCounter = 0;
+      console.log(false);
+    }
+    if(localCounter > 10){
+       $localStorage.getCounter = 0;
+     }
+
    if(TodaysDate > 1 && TodaysDate < 6){
      if(!checkForUpdateInLocal){
        askedForUpate.asked().then(function(s){
@@ -28,21 +43,21 @@ angular.module('vrat', ['ionic', 'vrat.controllers', 'vratFilter', 'vrat.Service
 else{
     $localStorage.updateDialog = false;
   }
-if(TodaysDate > 6 && TodaysDate < 11){
-     if(!checkForRateInLocal){
-       askedForRating.askedForRate().then(function(s){
-      if(s){
-        $localStorage.rateDialog = true;
-      }
-      else{
-        $localStorage.rateDialog = false;
-      }
-    });
-  }
-}
-else{
-  $localStorage.rateDialog = false;
-}
+// if(TodaysDate > 6 && TodaysDate < 11){
+//      if(!checkForRateInLocal){
+//        askedForRating.askedForRate().then(function(s){
+//       if(s){
+//         $localStorage.rateDialog = true;
+//       }
+//       else{
+//         $localStorage.rateDialog = false;
+//       }
+//     });
+//   }
+// }
+// else{
+//   $localStorage.rateDialog = false;
+// }
   //   if(TodaysDate > 10){
   //       $localStorage.updateDialog = false;
   //   }
@@ -61,10 +76,11 @@ else{
       }
     })
   }}
-    else if(TodaysDate === 6){
+    if(localCounter == 0){
       if(!checkForRateInLocal){
    askedForRating.askedForRate().then(function(s){
      if(s){
+       console.log('s',s);
         $localStorage.rateDialog = true
       }
       else{

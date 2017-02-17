@@ -126,8 +126,12 @@ img{
     text-decoration: underline;
    
  }
- 
-/*a.tab-item {
-padding-left: 2%;
-    padding-right: 12%;
-}*/
+ .btn-color-footer{
+   background-color: gray;
+ }
+ .align-center{
+   text-align: center;
+ }
+ .align-right{
+   float: right;
+ }

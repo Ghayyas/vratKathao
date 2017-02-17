@@ -246,12 +246,12 @@ vratService.service('askedForRating',function($q,$cordovaAppRate,$window){
     callbacks: {
     onRateDialogShow: function(callback){
       callback(0) // do nothing
-     deffer.resolve(true); 
    },
     onButtonClicked: function(buttonIndex){
     //do noting
          if(buttonIndex == 1){
-           if(ionicPlatform == 'android'){
+            deffer.resolve(true);
+          if(ionicPlatform == 'android'){
              //do nothing
            }
            else{

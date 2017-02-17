@@ -1,7 +1,7 @@
 <ion-view view-title="Vrat Kathao" view-cache="false">
   <ion-nav-bar class="bar-positive">
   <ion-nav-back-button class="button-clear" ng-click="postDetail.back()">
-       <i class="ion-arrow-left-c"></i> Back
+       <i class="icon ion-ios-arrow-back"></i> Back
 </ion-nav-back-button>
 </ion-nav-bar>
   <ion-nav-buttons side="right">
@@ -24,11 +24,19 @@
     </div>
          <div class="padding gujarti" style="margin-top: 22px;" ng-bind-html="postDetail.content">
          </div>
-         <div class="padding">
+         <!--<div class="padding">
            <button class="button button-block button-positive" ng-click="postDetail.shareAnyWhere(postDetail.content)">
             <span style="float:left;"> <i class="icon ion-android-share-alt"></i></span>
             Share This Post
           </button>
+         </div>-->
+         <div class="padding row btn-color-footer">
+           <button class="button button-small button-balanced col" ng-click="postDetail.shareWhatsApp()"><span style="margin-right: 5px;"><i class="icon ion-social-whatsapp"></i></span> Share</button>
+          
+           <button class="button button-small button-calm col" ng-click="postDetail.shareAnyWhere()"><span style="margin-right: 5px;"><i class="icon ion-android-share-alt"></i></span> Share</button>
+          
+           <button class="button button-small button-positive col" ng-click="postDetail.shareFb()"><span style="margin-right: 5px;"><i class="icon ion-social-facebook"></i></span> Share</button>
+
          </div>
          
   </ion-content>

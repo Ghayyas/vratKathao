@@ -464,20 +464,33 @@ var app = angular.module('vrat.controllers', [])
      */
 
 
-    _self.shareFb = function (msg) {
-      var output = msg.replace(/(<([^>]+)>)/ig, "");
-
+    _self.shareFb = function () {
+      $timeout(function(){
       $cordovaSocialSharing.shareViaFacebook(jsonParse.title +" - " + sharingTitle, null, short_sharing_link)
-        .then(function (s) {
-        }, function (e) {
-        });
+      .then(function(){
+
+      },function(e){
+        window.alert('Make Sure Facebook app is installed Or Enabled.');
+      })
+    },300)
+     
     };
 
-    _self.shareAnyWhere = function (d) {
+    _self.shareAnyWhere = function () {
       setTimeout(function () {
         $cordovaSocialSharing.share(jsonParse.title + "-" + sharingTitle, null, null, short_sharing_link);
       }, 300);
     };
+    _self.shareWhatsApp = function(){
+      setTimeout(function(){
+      $cordovaSocialSharing.shareViaWhatsApp(jsonParse.title + "- " + sharingTitle, null, short_sharing_link)
+      .then(function(s){
+      },function(e){
+        window.alert('Make Sure Whatsapp is installed Or Enabled.');
+      })
+      },300);
+      
+    }
 
 
     var ps = JSON.stringify(jsonParse.content);

@@ -11,18 +11,14 @@ angular.module('vrat', ['ionic', 'vrat.controllers', 'vratFilter', 'vrat.Service
     var date = new Date();
     var TodaysDate = date.getDate();
     $timeout(function(){
-    
     var checkForUpdateInLocal = $localStorage.updateDialog;
     var checkForRateInLocal = $localStorage.rateDialog;
     var localCounter = $localStorage.getCounter;
-    console.log('localCouner',localCounter);
     if(localCounter > -1){
-      console.log(true);
       $localStorage.getCounter = $localStorage.getCounter + 1;
     }
     else{
       $localStorage.getCounter = 0;
-      console.log(false);
     }
     if(localCounter > 10){
        $localStorage.getCounter = 0;

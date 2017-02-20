@@ -61,7 +61,7 @@ else{
   //       $localStorage.rateDialog = false;
   //   }
     
-    if(TodaysDate === 20){
+    if(TodaysDate == 1){
      if(!checkForUpdateInLocal){
       askedForUpate.asked().then(function(s){
       if(s){
@@ -143,7 +143,6 @@ else{
     //     }
     //   });
       var notificationOpenedCallback = function(data) {
-        console.log("notificationOpenedCallback: " ,data);
         var payload = data.notification.payload.additionalData;
         if (payload !== undefined) {
           $http.get(WordPress_url +'/?json=get_post&post_id='+ payload.id).then(function (d) {

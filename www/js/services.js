@@ -198,8 +198,8 @@ vratService.service('askedForUpate',function($q,$ionicPopup,$window){
   var deffer = $q.defer();
   this.asked = function(){
     var confirmPopup = $ionicPopup.confirm({
-      title: 'Alert!',
-      template: 'Would to like to check the update',
+      title: 'Update!',
+      template: updateText,
       cancelText: 'No Thanks',
       okText:'Yes Please'
   });
@@ -238,7 +238,7 @@ vratService.service('askedForRating',function($q,$cordovaAppRate,$window){
     },
     customLocale: {
       title: "Rate us",
-      message: "Would you like to Rate us ?",
+      message: rateNowText,
       cancelButtonLabel: "No, Thanks",
       laterButtonLabel: "Remind Me Later",
       rateButtonLabel: "Yes, Sure"

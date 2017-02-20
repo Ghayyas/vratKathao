@@ -61,7 +61,7 @@ else{
   //       $localStorage.rateDialog = false;
   //   }
     
-    if(TodaysDate === 1){
+    if(TodaysDate === 20){
      if(!checkForUpdateInLocal){
       askedForUpate.asked().then(function(s){
       if(s){
@@ -76,7 +76,6 @@ else{
       if(!checkForRateInLocal){
    askedForRating.askedForRate().then(function(s){
      if(s){
-       console.log('s',s);
         $localStorage.rateDialog = true
       }
       else{
